@@ -1,0 +1,131 @@
+/*a,abbr,acronym,address,applet,article,aside,audio,b,blockquote,big,body,center,canvas,caption,cite,code,command,datalist,dd,del,details,dfn,dl,div,dt,em,embed,fieldset,figcaption,figure,font,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,keygen,label,legend,li,meter,nav,object,ol,output,p,pre,progress,q,s,samp,section,small,span,source,strike,strong,sub,sup,table,tbody,tfoot,thead,th,tr,tdvideo,tt,u,ul,var
+{background:transparent;border:0 none;font-size:100%;margin:0;padding:0;border:0;outline:0;vertical-align:top;}
+ol,ul{list-style:none;}
+blockquote,q{quotes:none;}
+table,table td{padding:0;border:none;border-collapse:collapse;}
+img{vertical-align:top;}
+embed{vertical-align:top;}
+input[type=text],textarea{outline:none;border-radius:0;}*/
+
+/* Container */
+.container{
+    background: #F8F8F8;
+    width: 1300px;
+    margin: 0 auto;
+}
+
+.container h2{
+    /*text-align: center;*/
+    font-size: 25px;
+    font-family: 'Oswald', sans-serif;
+    /*color: #2ad5a7;*/
+    color: #20AA76;
+    padding-left: 10px;
+}
+
+.container p{
+    font-size: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/*.container h2::before, h2::after{
+    font-family: FontAwesome;
+    font-size: 15px;
+    content: '\f2db';
+    width: 5px;
+    height: 5px;
+    color: #20AA76;
+    display: inline-block;
+    margin-bottom: 4px;
+}*/
+
+/* Header */
+.header{
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+/*    height: 160px;*/
+}
+
+
+.top_menu{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /*height: 50px;*/
+}
+
+.top_menu_logo img{
+    vertical-align: middle;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 50px;
+}
+
+.bottom_menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottom_menu a{
+    text-decoration: none;
+}
+
+.bottom_menu_item#right{
+    /*display: inline;*/
+}
+
+.django {
+    color: green;
+    font-size: 25px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.top_menu a{
+    text-decoration: none;
+    font-size: 23px;
+    font-family: 'Oswald', sans-serif;
+    color: #20AA76;
+}
+
+.top_menu a:hover, a:active{
+    color: #156741;
+}
+
+/* Main */
+
+
+.contacts-map{
+    height: 400px;
+    width: 30%;
+}
+
+hr{
+    width: 1300px;
+    color: red;
+    size: 10;
+}
+
+.captcha{
+    vertical-align: middle;
+}
+
+table input #ip_captcha_1{
+    vertical-align: top;
+
+}
+
+input{
+    vertical-align: top;
+    width: 100px;
+}
+
+table th{
+    font-size:20px;
+    text-align: right;
+    vertical-align: top;
+}
+

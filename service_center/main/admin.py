@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import *
+from repair.models import *
 
 
 @admin.register(Vendor)
@@ -19,16 +19,6 @@ class DeviceAdmin(admin.ModelAdmin):
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(EmployeeType)
-class EmployeeTypeAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Employee)
-class EmployeeAdmin(admin.ModelAdmin):
     pass
 
 

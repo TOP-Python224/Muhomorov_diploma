@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru-ru">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald&display=swap">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+  </head>
+
+  <body>
+    {% block header %}
+      <header class="header">
+        <div class="container">
+          <div class="top_menu">
+            <div class="top_menu_logo">
+              <img src="{% static 'images/python.svg' %}">
+            </div>
+            {% for item in menu_items%}
+            <div class="top_menu_item">
+              <a href="{% url item.url_name %}">{{ item.menu_name }}</a>
+            </div>
+            {% endfor%}
+
+<!--            <div class="top_menu_item">-->
+<!--              <a href="{% url 'root' %}">Главная</a>-->
+<!--            </div>-->
+<!--            <div class="top_menu_item">-->
+<!--              <a href="{% url 'about' %}">О компании</a>-->
+<!--            </div>-->
+<!--            <div class="top_menu_item">-->
+<!--              <a href="{% url 'certs' %}">Сертификаты</a>-->
+<!--            </div>-->
+<!--            <div class="top_menu_item">-->
+<!--              <a href="{% url 'services' %}">Услуги и цены</a>-->
+<!--            </div>-->
+<!--            <div class="top_menu_item">-->
+<!--              <a href="{% url 'contacts' %}">Контакты</a>-->
+<!--            </div>-->
+<!--            <div class="top_menu_item">-->
+<!--              <a href="status">Проверка статуса ремонта</a>-->
+<!--            </div>-->
+            <div class="top_menu_item">
+              <a href="repair/login" target="new">Служебный раздел</a>
+            </div>
+          </div>
+        </div>
+      </header>
+    {% endblock header %}
+
+    <hr>
+      <main class="main">
+        <div class="container">
+          {% block main %}
+          <p>
+            Контент
+          </p>
+          {% endblock main %}
+        </div>
+      </main>
+
+    <hr>
+    {% block footer %}
+      <footer class="footer">
+        <div class="container">
+          <div class="bottom_menu">
+            <div class="bottom_menu_item" id="left">
+              ООО Сервисный центр "Питон" © 2023г.
+            </div>
+            <div class="bottom_menu_item">
+              Дизайн, верстка и программирование: <a href="mailto:io25nsk@gmail.com">io25nsk</a>
+            </div>
+            <div class="bottom_menu_item" id="right">
+              Сделано в <span class="django">Django</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    {% endblock footer %}
+
+  </body>
+</html>

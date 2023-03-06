@@ -1,0 +1,23 @@
+{% extends base_template|default:"main/base.html" %}
+
+
+{% block main %}
+  <div>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <table cellpadding="10">
+        {{ form.as_table }}
+        <tr>
+          <td>
+            <input type="submit" value="Проверить">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <div>
+    {% if status %}
+      <p>Статус ремонта: {{ status }}.</p>
+    {% endif %}
+  </div>
+{% endblock main %}
