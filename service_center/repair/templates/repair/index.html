@@ -1,0 +1,32 @@
+{% block main %}
+
+<p>Вы вошли как: {{ user.get_username }} ({{ user.first_name }} {{user.last_name}})</p>
+<p><a href="{% url 'logout' %}">Выйти</a></p>
+<p><a href="{% url 'repair_new' %}">Ввести новый наряд</a></p>
+
+<fieldset>
+  <legend>Список нарядов</legend>
+  <table border="1" cellpadding="10" cellspacing="1">
+    <tr>
+      <td>Номер наряда</td>
+      <td>Фамилия Имя Отчество</td>
+      <td>Ремонтируемое устройство</td>
+      <td>Действия с нарядом</td>
+    </tr>
+      {% for order in orders %}
+    <tr>
+      <td>{{ order }}</td>
+      <td>{{ order.client }}</td>
+      <td>{{ order.device}}</td>
+      <td><a href="view/{{ order.id }}/">Просмотр</a> |
+          <a href="edit/{{ order.id }}/">Редактирование</a>
+      </td>
+    </tr>
+      {% endfor %}
+  </table>
+</fieldset>
+
+<!--<p>Вы не вошли!</p>-->
+<!--<p><a href="{% url 'login' %}">Войти</a></p>-->
+
+{% endblock main %}

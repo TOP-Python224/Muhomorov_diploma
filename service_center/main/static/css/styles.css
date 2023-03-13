@@ -129,3 +129,12 @@ table th{
     vertical-align: top;
 }
 
+input{
+    display: inline-block;
+    vertical-align: top;
+    width: auto;
+}
+
+.hidden{
+    display: none;
+}

@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.views.generic import FormView
 from main.forms import StatusForm
-from repair.models import *
+from repair.models import RepairOrder
 
 title = 'Сервисный центр \"Питон\"'
 
@@ -15,6 +15,7 @@ menu_items = [
     {'menu_name': 'Услуги', 'url_name': 'services'},
     {'menu_name': 'Контакты', 'url_name': 'contacts'},
     {'menu_name': 'Статус ремонта', 'url_name': 'status'},
+    {'menu_name': 'Служебный раздел', 'url_name': 'login'},
 ]
 
 common_context = {'title': title, 'menu_items': menu_items}

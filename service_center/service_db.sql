@@ -119,7 +119,7 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,7 +128,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$390000$zrXqQwcm9XJ5vUWPHZMVSz$gQx3/pJJcCLoRkaa3F64u3lhrFRAdM2hWHNf16bJYfY=','2023-03-06 00:37:10.682775',1,'root','','','root@servicepython.ru',1,1,'2023-03-06 00:36:38.331441'),(2,'pbkdf2_sha256$390000$2HBFSX45hqWKUyHTnfe4Ry$q+gDYNpSu6qeXOULlfi8mey+JHdvzADjtXSSMrCwCCc=',NULL,0,'master1','Петр','Петров','petrov@servicepython.ru',0,1,'2023-03-06 00:38:49.000000'),(3,'pbkdf2_sha256$390000$BeydK8HVQViNrzJr9HG4aB$coW3zlXgA8JX3r8Nd/XzR2KAObbbBzbyJsZeJ7S5vlc=',NULL,0,'master2','Иван','Иванов','ivanov@servicepython.ru',0,1,'2023-03-06 00:39:58.000000'),(4,'pbkdf2_sha256$390000$BkMLizS3cACeHOCv7kjKTb$8/KpX5fnnOw/8G7Fa54qDetAo1gJpGz4ujI7PgSWUQ0=',NULL,0,'master3','Сергей','Сергеев','sergeev@servicepython.ru',0,1,'2023-03-06 00:40:35.000000');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$390000$zrXqQwcm9XJ5vUWPHZMVSz$gQx3/pJJcCLoRkaa3F64u3lhrFRAdM2hWHNf16bJYfY=','2023-03-12 17:12:34.992385',1,'root','Рут','Админов','root@servicepython.ru',1,1,'2023-03-06 00:36:38.000000'),(2,'pbkdf2_sha256$390000$OMrtOldq2qkEfTnBn0vMZT$Cc5q9kA9aCCa5Op99LX2j4KoN0w09hUeRSCXx04WlNw=','2023-03-12 16:01:21.893187',0,'master1','Петр','Петров','petrov@servicepython.ru',0,1,'2023-03-06 00:38:49.000000'),(3,'pbkdf2_sha256$390000$aFAasRLcsvBbdkqN8l2ETP$jVvhQ+1cNB127bMonnnEshiNk8Dtu4zCTQFEmIQkPbc=','2023-03-12 16:02:07.852983',0,'master2','Иван','Иванов','ivanov@servicepython.ru',0,1,'2023-03-06 00:39:58.000000'),(4,'pbkdf2_sha256$390000$BkMLizS3cACeHOCv7kjKTb$8/KpX5fnnOw/8G7Fa54qDetAo1gJpGz4ujI7PgSWUQ0=','2023-03-10 12:36:50.205249',0,'master3','Сергей','Сергеев','sergeev@servicepython.ru',0,1,'2023-03-06 00:40:35.000000'),(5,'pbkdf2_sha256$390000$Ckx9ASD4yFUrlDmrBV6ljj$3PGi1l2iwlLs2Yd7MGIzOsiCfZLgN/1fXavoZBC9edQ=','2023-03-12 17:15:56.911266',0,'priemka1','Кирилл','Кириллов','kirillov@servicepython.ru',0,1,'2023-03-10 07:05:25.000000'),(6,'pbkdf2_sha256$390000$ZLsb9Fsj2phIFPP1TVH7wg$YqP63hXNsnPxCpg4CqZkbD2RBVyroZ0G5tsYhoU8yO0=','2023-03-12 08:38:46.810296',0,'master4','Андрей','Андреев','andreev@servicepython.ru',0,1,'2023-03-12 08:31:32.000000'),(7,'pbkdf2_sha256$390000$3BLoNZuWdfiJgKeJBDIDqb$n8yESsklrr/7e21nSRgqm/y0kg5MuiEHAGcomxqDRD8=','2023-03-12 08:39:16.349740',0,'manager1','Анто','Антонов','antonov@servicepython.ru',0,1,'2023-03-12 08:33:13.000000');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,7 +148,7 @@ CREATE TABLE `auth_user_groups` (
   KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`),
   CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +157,7 @@ CREATE TABLE `auth_user_groups` (
 
 LOCK TABLES `auth_user_groups` WRITE;
 /*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
-INSERT INTO `auth_user_groups` VALUES (1,2,1),(2,3,1),(3,4,1);
+INSERT INTO `auth_user_groups` VALUES (1,2,1),(2,3,1),(3,4,1),(4,5,2),(5,6,1),(6,7,3);
 /*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,7 +204,7 @@ CREATE TABLE `captcha_captchastore` (
   `expiration` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `hashkey` (`hashkey`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,7 +213,7 @@ CREATE TABLE `captcha_captchastore` (
 
 LOCK TABLES `captcha_captchastore` WRITE;
 /*!40000 ALTER TABLE `captcha_captchastore` DISABLE KEYS */;
-INSERT INTO `captcha_captchastore` VALUES (3,'8*3=','24','08e52b7b593ef12b0691745ad629ab6a8180790c','2023-03-06 00:56:03.856265'),(4,'10-3=','7','18c61f85612b3347c5ed33e19c1c439fc99a2fc7','2023-03-06 00:58:10.063026'),(5,'4+5=','9','76780111b89ccfdf43762596b29c1e6a289c8c0c','2023-03-06 00:58:17.549001'),(6,'1*5=','5','476e251aa84f24c6f7f9f6a50a163655d2308c68','2023-03-06 00:58:19.350401'),(9,'1*2=','2','5eaab975a6aa29a1b917cabf961299cdf4fca5c6','2023-03-06 00:58:49.312451');
+INSERT INTO `captcha_captchastore` VALUES (41,'6+5=','11','cb5f0e2164973ff28db7e59d32ce692b24665cbc','2023-03-10 18:39:35.484875');
 /*!40000 ALTER TABLE `captcha_captchastore` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,7 +234,7 @@ CREATE TABLE `clients` (
   `address` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `clients_first_name_patronymic_last_name_phone_32d46832_uniq` (`first_name`,`patronymic`,`last_name`,`phone`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -243,7 +243,7 @@ CREATE TABLE `clients` (
 
 LOCK TABLES `clients` WRITE;
 /*!40000 ALTER TABLE `clients` DISABLE KEYS */;
-INSERT INTO `clients` VALUES (1,'Степан','Степанович','Степанов','stepa@mail.ru','79142355588','г. Якутск, пр. Ленина, 1, кв. 2'),(2,'Василий','Васильевич','Васильев','vasiliev@mail.ru','79131234567','г. Новосибирск, ул. Анодная, д.2, кв. 3'),(3,'Федор','Федорович','Федоров','','79111234554','г. Санкт-Петербург, ул. Морская, д.100, кв. 77');
+INSERT INTO `clients` VALUES (1,'Степан','Степанович','Степанов','stepa@mail.ru','79142355588','г. Якутск, пр. Ленина, 1, кв. 2'),(2,'Василий','Васильевич','Васильев','vasiliev@mail.ru','79131234567','г. Новосибирск, ул. Анодная, д.2, кв. 3'),(3,'Федор','Федорович','Федоров','','79111234554','г. Санкт-Петербург, ул. Морская, д.100, кв. 77'),(4,'Сидор','Сидорович','Сидоров','sss1970@yandex.ru','79245551179','г. Иркутск, ул. Гоголя, 10, кв. 20');
 /*!40000 ALTER TABLE `clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -293,7 +293,7 @@ CREATE TABLE `devices` (
   KEY `devices_vendor_id_868ea564_fk_vendors_id` (`vendor_id`),
   CONSTRAINT `devices_device_type_id_a366517d_fk_device_types_id` FOREIGN KEY (`device_type_id`) REFERENCES `device_types` (`id`),
   CONSTRAINT `devices_vendor_id_868ea564_fk_vendors_id` FOREIGN KEY (`vendor_id`) REFERENCES `vendors` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -302,7 +302,7 @@ CREATE TABLE `devices` (
 
 LOCK TABLES `devices` WRITE;
 /*!40000 ALTER TABLE `devices` DISABLE KEYS */;
-INSERT INTO `devices` VALUES (1,'B-100','B010203040','Гарантийный талон.','Не охлаждает.',2,6),(2,'EL-125','1234567890','Чек. Поцарапана.','Не моет.',5,5),(3,'RD-25F','RD987654321','Гарантийный талон, чек. Без шнура.','Не нагревается.',10,8);
+INSERT INTO `devices` VALUES (1,'B-100','B010203040','Гарантийный талон.','Не охлаждает.',2,6),(2,'EL-125','1234567890','Чек. Поцарапана.','Не моет.',5,5),(3,'RD-25F','RD987654321','Гарантийный талон, чек. Без шнура.','Не нагревается.',10,8),(4,'LGC-100','223344FGH','Чек.','Не охлаждает.',12,2);
 /*!40000 ALTER TABLE `devices` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -328,7 +328,7 @@ CREATE TABLE `django_admin_log` (
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `django_admin_log_chk_1` CHECK ((`action_flag` >= 0))
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -337,7 +337,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2023-03-06 00:38:10.958875','1','Мастера',1,'[{\"added\": {}}]',3,1),(2,'2023-03-06 00:38:17.191952','2','Приемка',1,'[{\"added\": {}}]',3,1),(3,'2023-03-06 00:38:25.720113','3','Менеджеры',1,'[{\"added\": {}}]',3,1),(4,'2023-03-06 00:38:49.468069','2',' ',1,'[{\"added\": {}}]',4,1),(5,'2023-03-06 00:39:43.077546','2','Петр Петров',2,'[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]',4,1),(6,'2023-03-06 00:39:58.129751','3',' ',1,'[{\"added\": {}}]',4,1),(7,'2023-03-06 00:40:19.108861','3','Иван Иванов',2,'[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]',4,1),(8,'2023-03-06 00:40:35.879873','4',' ',1,'[{\"added\": {}}]',4,1),(9,'2023-03-06 00:41:04.457198','4','Сергей Сергеев',2,'[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]',4,1),(10,'2023-03-06 00:42:30.152567','1','Холодильник Bosch B-100',1,'[{\"added\": {}}]',8,1),(11,'2023-03-06 00:43:11.531809','2','Посудомоечная машина Electrolux EL-125',1,'[{\"added\": {}}]',8,1),(12,'2023-03-06 00:44:08.632530','3','Мультиварка Redmond RD-25F',1,'[{\"added\": {}}]',8,1),(13,'2023-03-06 00:45:05.226139','1','Степанов Степан Степанович',1,'[{\"added\": {}}]',7,1),(14,'2023-03-06 00:46:13.571327','2','Васильев Василий Васильевич',1,'[{\"added\": {}}]',7,1),(15,'2023-03-06 00:47:28.182124','3','Федоров Федор Федорович',1,'[{\"added\": {}}]',7,1),(16,'2023-03-06 00:47:44.868363','1','Repair object (1)',1,'[{\"added\": {}}]',10,1),(17,'2023-03-06 00:48:01.749533','2','Repair object (2)',1,'[{\"added\": {}}]',10,1),(18,'2023-03-06 00:48:13.828622','3','Repair object (3)',1,'[{\"added\": {}}]',10,1),(19,'2023-03-06 00:48:34.840491','1','Ордер №1 от 2023-03-06',1,'[{\"added\": {}}]',14,1),(20,'2023-03-06 00:48:54.472305','2','Ордер №2 от 2023-03-06',1,'[{\"added\": {}}]',14,1),(21,'2023-03-06 00:49:12.493797','3','Ордер №3 от 2023-03-06',1,'[{\"added\": {}}]',14,1);
+INSERT INTO `django_admin_log` VALUES (1,'2023-03-06 00:38:10.958875','1','Мастера',1,'[{\"added\": {}}]',3,1),(2,'2023-03-06 00:38:17.191952','2','Приемка',1,'[{\"added\": {}}]',3,1),(3,'2023-03-06 00:38:25.720113','3','Менеджеры',1,'[{\"added\": {}}]',3,1),(4,'2023-03-06 00:38:49.468069','2',' ',1,'[{\"added\": {}}]',4,1),(5,'2023-03-06 00:39:43.077546','2','Петр Петров',2,'[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]',4,1),(6,'2023-03-06 00:39:58.129751','3',' ',1,'[{\"added\": {}}]',4,1),(7,'2023-03-06 00:40:19.108861','3','Иван Иванов',2,'[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]',4,1),(8,'2023-03-06 00:40:35.879873','4',' ',1,'[{\"added\": {}}]',4,1),(9,'2023-03-06 00:41:04.457198','4','Сергей Сергеев',2,'[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]',4,1),(10,'2023-03-06 00:42:30.152567','1','Холодильник Bosch B-100',1,'[{\"added\": {}}]',8,1),(11,'2023-03-06 00:43:11.531809','2','Посудомоечная машина Electrolux EL-125',1,'[{\"added\": {}}]',8,1),(12,'2023-03-06 00:44:08.632530','3','Мультиварка Redmond RD-25F',1,'[{\"added\": {}}]',8,1),(13,'2023-03-06 00:45:05.226139','1','Степанов Степан Степанович',1,'[{\"added\": {}}]',7,1),(14,'2023-03-06 00:46:13.571327','2','Васильев Василий Васильевич',1,'[{\"added\": {}}]',7,1),(15,'2023-03-06 00:47:28.182124','3','Федоров Федор Федорович',1,'[{\"added\": {}}]',7,1),(16,'2023-03-06 00:47:44.868363','1','Repair object (1)',1,'[{\"added\": {}}]',10,1),(17,'2023-03-06 00:48:01.749533','2','Repair object (2)',1,'[{\"added\": {}}]',10,1),(18,'2023-03-06 00:48:13.828622','3','Repair object (3)',1,'[{\"added\": {}}]',10,1),(19,'2023-03-06 00:48:34.840491','1','Ордер №1 от 2023-03-06',1,'[{\"added\": {}}]',14,1),(20,'2023-03-06 00:48:54.472305','2','Ордер №2 от 2023-03-06',1,'[{\"added\": {}}]',14,1),(21,'2023-03-06 00:49:12.493797','3','Ордер №3 от 2023-03-06',1,'[{\"added\": {}}]',14,1),(22,'2023-03-06 17:20:02.982853','1','EmployeeComment object (1)',1,'[{\"added\": {}}]',15,1),(23,'2023-03-06 17:21:25.751485','2','EmployeeComment object (2)',1,'[{\"added\": {}}]',15,1),(24,'2023-03-06 17:22:18.047211','2','EmployeeComment object (2)',2,'[{\"changed\": {\"fields\": [\"Comment\"]}}]',15,1),(25,'2023-03-09 14:55:18.283103','2','Петр Петров',2,'[{\"changed\": {\"fields\": [\"Active\"]}}]',4,1),(26,'2023-03-09 14:55:59.630484','2','Петр Петров',2,'[{\"changed\": {\"fields\": [\"Active\"]}}]',4,1),(27,'2023-03-09 17:44:04.744820','1','Рут Админов',2,'[{\"changed\": {\"fields\": [\"First name\", \"Last name\"]}}]',4,1),(28,'2023-03-10 07:05:25.722202','5',' ',1,'[{\"added\": {}}]',4,1),(29,'2023-03-10 07:06:04.672098','5','Кирилл Кириллов',2,'[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]',4,1),(30,'2023-03-10 12:41:21.610054','4','Кондиционер LG LGC-100',1,'[{\"added\": {}}]',8,1),(31,'2023-03-10 12:41:59.886005','4','Repair object (4)',1,'[{\"added\": {}}]',10,1),(32,'2023-03-10 12:43:30.564610','4','Сидоров Сидор Сидорович',1,'[{\"added\": {}}]',7,1),(33,'2023-03-10 12:43:50.735544','4','Наряд №4 от 2023-03-10',1,'[{\"added\": {}}]',14,1),(34,'2023-03-12 08:18:08.698520','3','2023-03-12 08:18:08.698520+00:00, Петр Петров, Запчасти заказаны.',1,'[{\"added\": {}}]',15,1),(35,'2023-03-12 08:31:32.625878','6',' ',1,'[{\"added\": {}}]',4,1),(36,'2023-03-12 08:32:15.327200','6','Андрей Андреев',2,'[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]',4,1),(37,'2023-03-12 08:33:13.445531','7',' ',1,'[{\"added\": {}}]',4,1),(38,'2023-03-12 08:34:17.544737','7','Анто Антонов',2,'[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]',4,1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -415,7 +415,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('yd7g6p2yydqy55ak49hf082bwgbfpyuh','.eJxVjEEOwiAQRe_C2hCmDIW6dO8ZyAwDUjVtUtqV8e7apAvd_vfef6lI21rj1vISR1FnBer0uzGlR552IHeabrNO87QuI-td0Qdt-jpLfl4O9--gUqvf2nvvfBBEgqG3iToLCMyDHzKjoU4yOiwlGGCBAr0JxjJjMc4mCOLU-wPDTDc1:1pYyqk:RTqLq6ogJYDj8DO3w1r0qDi_m8J8UiT7f77taPSxoX4','2023-03-20 00:37:10.684776');
+INSERT INTO `django_session` VALUES ('28z9vgj4s2ohgotfzikevlhls3pizte5','.eJxVjMEOgjAQRP-lZ9O0he4Wj975hma7WyxqIKFwMv67kHDQ22Tem3mrSNta4lbzEkdRV-XV5bdLxM88HUAeNN1nzfO0LmPSh6JPWnU_S37dTvfvoFAt-xqBbfJdMFkGHtoAmYRdS40lBPTIFBgNggcfjAVngZzFxoG0sqdOfb7iJDcX:1pbPIa:LOOH0jFqlIgINyawOpqhZUYNEhn_hnalJc3OiHqpzFI','2023-03-26 17:15:56.913255');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -437,7 +437,7 @@ CREATE TABLE `employee_comments` (
   KEY `employee_comments_repair_order_id_43afa9ad_fk_repair_orders_id` (`repair_order_id`),
   CONSTRAINT `employee_comments_added_by_id_f3ae3830_fk_auth_user_id` FOREIGN KEY (`added_by_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `employee_comments_repair_order_id_43afa9ad_fk_repair_orders_id` FOREIGN KEY (`repair_order_id`) REFERENCES `repair_orders` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -446,6 +446,7 @@ CREATE TABLE `employee_comments` (
 
 LOCK TABLES `employee_comments` WRITE;
 /*!40000 ALTER TABLE `employee_comments` DISABLE KEYS */;
+INSERT INTO `employee_comments` VALUES (1,'2023-03-06 17:20:02.981844','Требуются запчасти.',2,1),(2,'2023-03-06 17:22:18.047211','Протекает шланг.',3,2),(3,'2023-03-12 08:18:08.698520','Запчасти заказаны.',2,1);
 /*!40000 ALTER TABLE `employee_comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -472,7 +473,7 @@ CREATE TABLE `repair_orders` (
   CONSTRAINT `repair_orders_client_id_308d5681_fk_clients_id` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`),
   CONSTRAINT `repair_orders_device_id_9580168e_fk_devices_id` FOREIGN KEY (`device_id`) REFERENCES `devices` (`id`),
   CONSTRAINT `repair_orders_repair_id_974b57ee_fk_repairs_id` FOREIGN KEY (`repair_id`) REFERENCES `repairs` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -481,7 +482,7 @@ CREATE TABLE `repair_orders` (
 
 LOCK TABLES `repair_orders` WRITE;
 /*!40000 ALTER TABLE `repair_orders` DISABLE KEYS */;
-INSERT INTO `repair_orders` VALUES (1,'2023-03-06',NULL,1000.00,0.00,1,1,1),(2,'2023-03-06',NULL,1500.00,0.00,2,2,2),(3,'2023-03-06',NULL,0.00,0.00,3,3,3);
+INSERT INTO `repair_orders` VALUES (1,'2023-03-06',NULL,1000.00,0.00,1,1,1),(2,'2023-03-06',NULL,1500.00,0.00,2,2,2),(3,'2023-03-06',NULL,0.00,0.00,3,3,3),(4,'2023-03-10',NULL,0.00,0.00,4,4,4);
 /*!40000 ALTER TABLE `repair_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -555,7 +556,7 @@ CREATE TABLE `repairs` (
   CONSTRAINT `repairs_employee_id_e03bf9ba_fk_auth_user_id` FOREIGN KEY (`employee_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `repairs_repair_type_id_3bada170_fk_repair_types_id` FOREIGN KEY (`repair_type_id`) REFERENCES `repair_types` (`id`),
   CONSTRAINT `repairs_status_id_2be2d67d_fk_repair_statuses_id` FOREIGN KEY (`status_id`) REFERENCES `repair_statuses` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -564,7 +565,7 @@ CREATE TABLE `repairs` (
 
 LOCK TABLES `repairs` WRITE;
 /*!40000 ALTER TABLE `repairs` DISABLE KEYS */;
-INSERT INTO `repairs` VALUES (1,1,2,1,6),(2,0,3,2,1),(3,0,4,4,3);
+INSERT INTO `repairs` VALUES (1,1,2,1,6),(2,0,3,2,1),(3,0,4,4,3),(4,0,2,1,2);
 /*!40000 ALTER TABLE `repairs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -602,4 +603,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-06  7:54:32
+-- Dump completed on 2023-03-13  8:40:42

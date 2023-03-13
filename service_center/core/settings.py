@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'repair.apps.RepairConfig',
+    'accounts.apps.AccountsConfig',
     'captcha',
 ]
 
@@ -137,3 +138,6 @@ CAPTCHA_BACKGROUND_COLOR = '#f8f8f8'
 
 # Mail settings
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Auth settings
+LOGIN_REDIRECT_URL = '/repair'

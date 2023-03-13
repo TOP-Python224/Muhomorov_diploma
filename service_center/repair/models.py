@@ -70,6 +70,9 @@ class EmployeeComment(models.Model):
     class Meta:
         db_table = 'employee_comments'
 
+    def __str__(self):
+        return f"{self.date}, {self.added_by}, {self.comment}"
+
 
 class RepairType(models.Model):
     """Описывает типы ремонтов."""
@@ -114,7 +117,8 @@ class RepairOrder(models.Model):
     return_date = models.DateField(null=True, blank=True)
     estimated_price = models.DecimalField(max_digits=8,
                                           decimal_places=2,
-                                          default=0)
+                                          default=0,
+                                          help_text='Предполагаемая стоимость')
     final_price = models.DecimalField(max_digits=8,
                                       decimal_places=2,
                                       default=0)

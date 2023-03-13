@@ -1,0 +1,52 @@
+{% block main %}
+
+<p>Вы вошли как: {{ user.get_username }} ({{ user.first_name }} {{user.last_name}})</p>
+<p><a href="{% url 'logout' %}">Выйти</a></p>
+<p><a href="#" onclick="history.back();">Назад к списку нарядов</a></p>
+
+<fieldset>
+  <legend>Общие данные</legend>
+  <p>Дата приемки: {{ order.accept_date }}</p>
+  <p>Дата возврата: {{ order.return_date }}</p>
+  <p>Предполагаемая стоимость: {{ order.estimated_price }} руб.</p>
+  <p>Окончательная стоимость: {{ order.final_price }} руб.</p>
+  <p>Тип ремонта: {{ repair.repair_type }}</p>
+  <p>Статус ремонта: {{ repair.status }}</p>
+</fieldset>
+<br>
+<fieldset>
+  <legend>Клиент</legend>
+  <p>Фамилия: {{ client.last_name }}</p>
+  <p>Имя: {{ client.first_name }}</p>
+  <p>Отчество: {{ client.patronymic }}</p>
+  <p>e-mail: {{ client.email }}</p>
+  <p>Телефон: {{ client.phone }}</p>
+  <p>Адрес: {{ client.address }}</p>
+</fieldset>
+<br>
+<fieldset>
+  <legend>Устройство</legend>
+  <p>Тип: {{ device.device_type }}</p>
+  <p>Модель: {{ device.model }}</p>
+  <p>Производитель: {{ device.vendor }}</p>
+  <p>Серийный номер: {{ device.serial_number }}</p>
+  <p>Комплектация и состояние: {{ device.kit_state }}</p>
+  <p>Дефект: {{ device.defect }}</p>
+</fieldset>
+<br>
+<fieldset>
+  <legend>Комментарий</legend>
+  {% if comments %}
+    {% for comment in comments %}
+      <fieldset>
+        <legend>{{ comment.date }} {{comment.added_by}}</legend>
+          <p>{{ comment.comment }}</p>
+      </fieldset>
+      <br>
+    {% endfor %}
+  {% else%}
+  <p>Комментариев пока нет.</p>
+  {% endif%}
+</fieldset>
+
+{% endblock main %}

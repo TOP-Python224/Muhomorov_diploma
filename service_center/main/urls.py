@@ -10,5 +10,4 @@ urlpatterns = [
     path('services', services_index, name='services'),
     path('contacts', contacts_index, name='contacts'),
     path('status', status_index, name='status'),
-    # path('status', StatusFormView.as_view(), name='status'),
 ]
