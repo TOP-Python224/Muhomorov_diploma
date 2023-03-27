@@ -1,3 +1,5 @@
+from enum import Enum, IntEnum
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.http import HttpResponseForbidden, HttpResponseRedirect
@@ -10,6 +12,12 @@ from repair.forms import RepairOrderForm, ClientForm, DeviceForm, RepairForm, Em
 from repair.models import RepairOrder, EmployeeComment
 
 
+class GroupNumber(IntEnum):
+    MASTER = 1
+    RECEPTIONIST = 2
+    MANAGER = 3
+
+
 @method_decorator(login_required, name='dispatch')
 class RepairIndex(ListView):
     """
@@ -20,7 +28,7 @@ class RepairIndex(ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        if Group.objects.get(user=self.request.user).id == 1:
+        if Group.objects.get(user=self.request.user).id == GroupNumber.MASTER:
             queryset = RepairOrder.objects.filter(repair__employee=self.request.user.id)
         else:
             queryset = RepairOrder.objects.all()
@@ -89,9 +97,15 @@ def repair_new(request):
                 comments_form.is_valid()
                 ]):
             order_obj = order_form.save(commit=False)
-            order_obj.client = client_form.save()
-            order_obj.device = device_form.save()
-            order_obj.repair = repair_form.save()
+            client = client_form.save(commit=False)
+            device = device_form.save(commit=False)
+            repair = repair_form.save(commit=False)
+            order_obj.client = client
+            order_obj.device = device
+            order_obj.repair = repair
+            client.save()
+            device.save()
+            repair.save()
             order_obj.save()
 
             if comments_form.has_changed():
