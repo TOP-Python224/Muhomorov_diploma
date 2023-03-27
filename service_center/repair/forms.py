@@ -38,6 +38,7 @@ class RepairOrderForm(forms.ModelForm):
 
 
 class ClientForm(forms.ModelForm):
+    phone = forms.IntegerField(min_value=100000, max_value=99999999999)
 
     class Meta:
         model = Client
