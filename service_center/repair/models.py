@@ -1,3 +1,6 @@
+from datetime import date
+
+from django.core.validators import RegexValidator
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -45,11 +48,12 @@ class Device(models.Model):
 
 class Client(models.Model):
     """Описывает клиентов."""
-    first_name = models.CharField(max_length=25, help_text='Введите имя')
+    phone_validator = RegexValidator(regex=r"^\d{6,11}$", message='Номер должен быть от 6 до 11 цифр!')
+    first_name = models.CharField(max_length=25)
     patronymic = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
-    email = models.CharField(max_length=30, blank=True)
-    phone = models.CharField(max_length=11)
+    email = models.EmailField(max_length=50, blank=True)
+    phone = models.CharField(validators=[phone_validator], max_length=11)
     address = models.CharField(max_length=50)
 
     class Meta:
@@ -65,10 +69,11 @@ class EmployeeComment(models.Model):
     date = models.DateTimeField(auto_now=True)
     repair_order = models.ForeignKey('RepairOrder', models.PROTECT, default=None)
     added_by = models.ForeignKey(User, models.PROTECT)
-    comment = models.CharField(max_length=100)
+    comment = models.CharField(max_length=100, blank=True)
 
     class Meta:
         db_table = 'employee_comments'
+        ordering = ['-date']
 
     def __str__(self):
         return f"{self.date}, {self.added_by}, {self.comment}"
@@ -113,12 +118,12 @@ class Repair(models.Model):
 
 class RepairOrder(models.Model):
     """Описывает принятия на ремонты."""
-    accept_date = models.DateField(auto_now_add=True)
+    accept_date = models.DateField(default=date.today)
+    # accept_date = models.DateField(auto_now_add=True, editable=True)
     return_date = models.DateField(null=True, blank=True)
     estimated_price = models.DecimalField(max_digits=8,
                                           decimal_places=2,
-                                          default=0,
-                                          help_text='Предполагаемая стоимость')
+                                          default=0)
     final_price = models.DecimalField(max_digits=8,
                                       decimal_places=2,
                                       default=0)
@@ -129,6 +134,7 @@ class RepairOrder(models.Model):
 
     class Meta:
         db_table = 'repair_orders'
+        ordering = ['-accept_date', '-id']
 
     def __str__(self):
         return f"Наряд №{self.pk} от {self.accept_date}"

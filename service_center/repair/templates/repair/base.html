@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru-ru">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'repair/css/styles.css' %}">
+  </head>
+
+  <body>
+    {% block header %}
+    <div class="header">
+      <p>Вы вошли как: <a href="{% url 'password_change' %}">{{ user.username }} ({{ user }})</a></p>
+      <p><a href="{% url 'logout' %}">Выйти</a></p>
+      <p><a href="{% url 'repair_root' %}">Назад к списку нарядов</a></p>
+      <p><a href="{% url 'repair_new' %}">Создать новый наряд</a></p>
+    </div>
+    {% endblock header %}
+
+      <main class="main">
+        <div class="container">
+          {% block main %}
+          <p>
+            Контент
+          </p>
+          {% endblock main %}
+        </div>
+      </main>
+
+  </body>
+</html>

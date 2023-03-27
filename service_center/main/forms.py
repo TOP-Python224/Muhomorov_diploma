@@ -1,5 +1,5 @@
 from django import forms
-from repair.models import RepairOrder
+# from repair.models import RepairOrder
 from captcha.fields import CaptchaField
 
 
@@ -13,6 +13,6 @@ class StatusForm(forms.Form):
         label='Введите результат:'
     )
 
-    class Meta:
-        Model = RepairOrder
+    # class Meta:
+    #     Model = RepairOrder
 

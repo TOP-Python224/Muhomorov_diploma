@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru-ru">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'repair/css/print-styles.css' %}">
+  </head>
+
+<h3>ООО Сервисный центр "Питон"</h3>
+<p>г. Новосибирск, ул. Тюленина, 20</p>
+<p>т. 8-383-1234567</p>
+
+<h2>Наряд на ремонт № {{ order.id }} от {{ order.accept_date }}</h2>
+
+  <table>
+    <tr>
+      <td>
+        Владелец:
+      </td>
+      <td>
+        {{ client }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Электронная почта:
+      </td>
+      <td>
+        {{ client.email }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Телефон:
+      </td>
+      <td>
+        {{ client.phone }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Адрес:
+      </td>
+      <td>
+        {{ client.address }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Оборудование:
+      </td>
+      <td>
+        {{ device }} с/н {{ device.serial_number }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Тип ремонта:
+      </td>
+      <td>
+        {{ repair.repair_type }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Выездной ремонт:
+      </td>
+      <td>
+        {% if repair.is_visiting %}
+        Да
+        {% else %}
+        Нет
+        {% endif%}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Комплектация и состояние:
+      </td>
+      <td>
+        {{ device.kit_state }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Неисправность:
+      </td>
+      <td>
+        {{ device.defect }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Предполагаемая стоимость:
+      </td>
+      <td>
+        {{ order.estimated_price }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Назначен мастер:
+      </td>
+      <td>
+        {{ repair.employee }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Назначен мастер:
+      </td>
+    </tr>
+  </table>
+
+
+  <p>Принял: {{ user.name }}</p>
+
+  <p>Вы можете проверить статус ремонта на сайте http://service-python.ru/status </p>
+
+<!--<script>-->
+<!--window.onafterprint = window.close;-->
+<!--window.print();-->
+<!--</script>-->

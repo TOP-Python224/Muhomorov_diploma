@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 config = {
     # ключ — сетевое имя системы, также известное как HOSTNAME
-    '': 'my.cnf',
+    'pc': 'my.cnf',
     'BigBrother': 'teacher.cnf',
 }
 system_name = node()

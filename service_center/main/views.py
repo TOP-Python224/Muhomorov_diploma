@@ -1,8 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.urls import reverse
-from django.views.generic import FormView
+from django.shortcuts import render
 from main.forms import StatusForm
 from repair.models import RepairOrder
 
@@ -59,26 +56,17 @@ def status_index(request):
 
     elif request.method == 'POST':
         form = StatusForm(request.POST)
-        print(f'{form.data = }')
         if form.is_valid():
-            print(f'{form.cleaned_data = }')
             number = form.cleaned_data['number']
             try:
                 status = RepairOrder.objects.get(pk=number).repair.status.name
             except ObjectDoesNotExist:
                 status = 'Неправильный номер наряда'
 
-    status_context = common_context | {'form': form} | {'status': status}
-    print(status_context)
+    status_context = common_context | {'form': form, 'status': status}
 
     return render(
         request,
         'main/status.html',
         status_context
     )
-
-
-# class StatusFormView(FormView):
-#     form_class = StatusForm
-#     template_name = 'main/status.html'
-#     success_url = '/'
