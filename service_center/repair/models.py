@@ -131,6 +131,11 @@ class RepairOrder(models.Model):
     client = models.ForeignKey(Client, models.PROTECT)
     device = models.ForeignKey(Device, models.PROTECT)
     repair = models.OneToOneField(Repair, models.PROTECT)
+    employee = models.ManyToManyField(
+        User,
+        through=EmployeeComment,
+        through_fields=('repair_order', 'added_by'),
+    )
 
     class Meta:
         db_table = 'repair_orders'
