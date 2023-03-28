@@ -105,6 +105,7 @@ def repair_new(request):
             order_obj.client = client
             order_obj.device = device
             order_obj.repair = repair
+            order_obj.added_by = request.user
             client.save()
             device.save()
             repair.save()
@@ -115,6 +116,15 @@ def repair_new(request):
                 comment_obj.repair_order = order_obj
                 comment_obj.added_by = request.user
                 comment_obj.save()
+
+            send_mail(
+                'Новый наряд на ремонт',
+                f'Вам назначен ремонт устройства {device}, '
+                f'ссылка на наряд http://127.0.0.1:8000/repair/view/{order_obj.id}/',
+                'root@service-python.ru',
+                [repair.employee.email],
+                fail_silently=False,
+                )
 
             return HttpResponseRedirect(reverse('repair_root'))
 
