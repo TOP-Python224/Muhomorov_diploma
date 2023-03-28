@@ -108,7 +108,7 @@ class RepairStatus(models.Model):
 class Repair(models.Model):
     """Описывает конкретные ремонты."""
     status = models.ForeignKey(RepairStatus, models.PROTECT)
-    estimated_duration = models.PositiveIntegerField
+    estimated_duration = models.PositiveIntegerField(default=3)
     repair_type = models.ForeignKey(RepairType, models.PROTECT)
     is_visiting = models.BooleanField(default=False)
     employee = models.ForeignKey(User, models.PROTECT)

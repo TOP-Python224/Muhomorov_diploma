@@ -53,6 +53,7 @@ input[type=text],textarea{outline:none;border-radius:0;}*/
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    /*position: fixed;*/
     /*height: 50px;*/
 }
 

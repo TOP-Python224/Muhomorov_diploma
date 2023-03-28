@@ -2,6 +2,7 @@ from enum import Enum, IntEnum
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.core.mail import send_mail
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -14,7 +15,7 @@ from repair.models import RepairOrder, EmployeeComment
 
 class GroupNumber(IntEnum):
     MASTER = 1
-    RECEPTIONIST = 2
+    ACCEPTOR = 2
     MANAGER = 3
 
 
@@ -47,7 +48,8 @@ class RepairView(DetailView):
         order_id = self.kwargs['pk']
         order = get_object_or_404(RepairOrder, pk=order_id)
         comments = EmployeeComment.objects.filter(repair_order__pk=order_id)
-        if not (group_id in (2, 3) or self.request.user.id == order.repair.employee.id):
+        if not (group_id in (GroupNumber.ACCEPTOR, GroupNumber.MANAGER)
+                or self.request.user.id == order.repair.employee.id):
             return HttpResponseForbidden(f'Ремонт по наряду №{order_id} выполняет другой мастер!'
                                          f'Вы не можете просматривать наряды других мастеров!')
 
@@ -73,7 +75,7 @@ def repair_new(request):
     """
     Создание нового наряда
     """
-    if Group.objects.get(user=request.user).id != 2:
+    if Group.objects.get(user=request.user).id != GroupNumber.ACCEPTOR:
         return HttpResponseForbidden('Вы не можете создавать наряды!')
 
     if request.method == 'GET':
@@ -140,7 +142,7 @@ def repair_edit(request, pk):
     comments = EmployeeComment.objects.filter(repair_order__pk=pk)
     status_id = repair.status.id
 
-    if not (group_id == 2 or request.user.id == order.repair.employee.id):
+    if not (group_id == GroupNumber.ACCEPTOR or request.user.id == order.repair.employee.id):
         return HttpResponseForbidden(f'Ремонт по наряду №{order.pk} выполняет другой мастер!'
                                      f'Вы не можете редактировать наряды других мастеров!')
 
@@ -171,7 +173,13 @@ def repair_edit(request, pk):
             if repair_form_obj.status.id == 3 \
                     and status_id != 3 \
                     and client.email:
-                print('Ready!')
+                send_mail(
+                    'Сообщение из СЦ "Питон"',
+                    f'Ремонт Вашего устройства {device} закончен, пожалуйста заберите его в СЦ "Питон".',
+                    'root@service-python.ru',
+                    [client.email],
+                    fail_silently=False,
+                )
 
             if comments_form.has_changed():
                 comment_obj = comments_form.save(commit=False)
