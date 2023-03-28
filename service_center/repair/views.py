@@ -3,6 +3,7 @@ from enum import Enum, IntEnum
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.core.mail import send_mail
+from django.db import transaction
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -98,31 +99,27 @@ def repair_new(request):
                 repair_form.is_valid(),
                 comments_form.is_valid()
                 ]):
-            order_obj = order_form.save(commit=False)
-            client = client_form.save(commit=False)
-            device = device_form.save(commit=False)
-            repair = repair_form.save(commit=False)
-            order_obj.client = client
-            order_obj.device = device
-            order_obj.repair = repair
-            order_obj.added_by = request.user
-            client.save()
-            device.save()
-            repair.save()
-            order_obj.save()
 
-            if comments_form.has_changed():
-                comment_obj = comments_form.save(commit=False)
-                comment_obj.repair_order = order_obj
-                comment_obj.added_by = request.user
-                comment_obj.save()
+            with transaction.atomic():
+                order_obj = order_form.save(commit=False)
+                order_obj.client = client_form.save()
+                order_obj.device = device_form.save()
+                order_obj.repair = repair_form.save()
+                order_obj.added_by = request.user
+                order_obj.save()
+
+                if comments_form.has_changed():
+                    comment_obj = comments_form.save(commit=False)
+                    comment_obj.repair_order = order_obj
+                    comment_obj.added_by = request.user
+                    comment_obj.save()
 
             send_mail(
                 'Новый наряд на ремонт',
-                f'Вам назначен ремонт устройства {device}, '
+                f'Вам назначен ремонт устройства {order_obj.device}, '
                 f'ссылка на наряд http://127.0.0.1:8000/repair/view/{order_obj.id}/',
                 'root@service-python.ru',
-                [repair.employee.email],
+                [order_obj.repair.employee.email],
                 fail_silently=False,
                 )
 
@@ -175,16 +172,18 @@ def repair_edit(request, pk):
                 device_form.is_valid(),
                 repair_form.is_valid(),
                 comments_form.is_valid()]):
-            order_obj = order_form.save()
-            client_form.save()
-            device_form.save()
-            repair_form_obj = repair_form.save()
 
-            if comments_form.has_changed():
-                comment_obj = comments_form.save(commit=False)
-                comment_obj.repair_order = order_obj
-                comment_obj.added_by = request.user
-                comment_obj.save()
+            with transaction.atomic():
+                order_obj = order_form.save()
+                client_form.save()
+                device_form.save()
+                repair_form_obj = repair_form.save()
+
+                if comments_form.has_changed():
+                    comment_obj = comments_form.save(commit=False)
+                    comment_obj.repair_order = order_obj
+                    comment_obj.added_by = request.user
+                    comment_obj.save()
 
             if repair_form_obj.status.id == 3 \
                     and status_id != 3 \
