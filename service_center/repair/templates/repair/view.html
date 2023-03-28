@@ -8,6 +8,7 @@
   <p>Предполагаемая стоимость: {{ order.estimated_price }} руб.</p>
   <p>Окончательная стоимость: {{ order.final_price }} руб.</p>
   <p>Тип ремонта: {{ repair.repair_type }}</p>
+  <p>Предполагаемый срок: {{ repair.estimated_duration }} дней.</p>
   <p>Выездной ремонт:
     {% if repair.is_visiting %}
       Да
@@ -32,8 +33,8 @@
   <p>Модель: {{ device.model }}</p>
   <p>Производитель: {{ device.vendor }}</p>
   <p>Серийный номер: {{ device.serial_number }}</p>
-  <p>Комплектация и состояние: {{ device.kit_state }}</p>
-  <p>Неисправность: {{ device.defect }}</p>
+  <p>Комплектация и состояние: {{ order.kit_state }}</p>
+  <p>Неисправность: {{ repair.defect }}</p>
 </fieldset>
 <br>
 <fieldset>

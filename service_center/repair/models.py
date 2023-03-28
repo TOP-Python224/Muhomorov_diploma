@@ -35,8 +35,6 @@ class Device(models.Model):
     device_type = models.ForeignKey(DeviceType, models.PROTECT)
     model = models.CharField(max_length=30)
     serial_number = models.CharField(max_length=30)
-    kit_state = models.CharField(max_length=150)
-    defect = models.CharField(max_length=300)
 
     class Meta:
         db_table = 'devices'
@@ -54,7 +52,7 @@ class Client(models.Model):
     last_name = models.CharField(max_length=25)
     email = models.EmailField(max_length=50, blank=True)
     # phone = models.CharField(validators=[phone_validator], max_length=11)
-    phone = models.IntegerField()
+    phone = models.BigIntegerField()
     address = models.CharField(max_length=50)
 
     class Meta:
@@ -108,10 +106,11 @@ class RepairStatus(models.Model):
 class Repair(models.Model):
     """Описывает конкретные ремонты."""
     status = models.ForeignKey(RepairStatus, models.PROTECT)
-    estimated_duration = models.PositiveIntegerField(default=3)
+    estimated_duration = models.PositiveIntegerField(default=5)
     repair_type = models.ForeignKey(RepairType, models.PROTECT)
     is_visiting = models.BooleanField(default=False)
     employee = models.ForeignKey(User, models.PROTECT)
+    defect = models.CharField(max_length=300)
 
     class Meta:
         db_table = 'repairs'
@@ -120,7 +119,6 @@ class Repair(models.Model):
 class RepairOrder(models.Model):
     """Описывает принятия на ремонты."""
     accept_date = models.DateField(default=date.today)
-    # accept_date = models.DateField(auto_now_add=True, editable=True)
     return_date = models.DateField(null=True, blank=True)
     estimated_price = models.DecimalField(max_digits=8,
                                           decimal_places=2,
@@ -132,11 +130,14 @@ class RepairOrder(models.Model):
     client = models.ForeignKey(Client, models.PROTECT)
     device = models.ForeignKey(Device, models.PROTECT)
     repair = models.OneToOneField(Repair, models.PROTECT)
+
     employee = models.ManyToManyField(
         User,
         through=EmployeeComment,
         through_fields=('repair_order', 'added_by'),
     )
+    kit_state = models.CharField(max_length=150)
+    added_by = models.ForeignKey(User, models.PROTECT, related_name='+')
 
     class Meta:
         db_table = 'repair_orders'

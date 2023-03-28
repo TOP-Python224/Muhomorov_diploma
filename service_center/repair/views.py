@@ -170,6 +170,12 @@ def repair_edit(request, pk):
             device_form.save()
             repair_form_obj = repair_form.save()
 
+            if comments_form.has_changed():
+                comment_obj = comments_form.save(commit=False)
+                comment_obj.repair_order = order_obj
+                comment_obj.added_by = request.user
+                comment_obj.save()
+
             if repair_form_obj.status.id == 3 \
                     and status_id != 3 \
                     and client.email:
@@ -180,12 +186,6 @@ def repair_edit(request, pk):
                     [client.email],
                     fail_silently=False,
                 )
-
-            if comments_form.has_changed():
-                comment_obj = comments_form.save(commit=False)
-                comment_obj.repair_order = order_obj
-                comment_obj.added_by = request.user
-                comment_obj.save()
 
             return HttpResponseRedirect(reverse('repair_root'))
 

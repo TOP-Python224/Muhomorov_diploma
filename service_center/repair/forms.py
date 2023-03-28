@@ -27,18 +27,19 @@ class RepairOrderForm(forms.ModelForm):
 
     class Meta:
         model = RepairOrder
-        fields = ('accept_date', 'return_date', 'estimated_price', 'final_price')
+        fields = ('accept_date', 'return_date', 'estimated_price', 'final_price', 'kit_state')
         labels = {
             'accept_date': 'Дата приемки',
             'return_date': 'Дата возврата',
+            'kit_state': 'Комплектация и состояние'
         }
         widgets = {
-            'accept_date': DateInput()
+            'kit_state': Textarea(attrs={'cols': 50, 'rows': 3}),
         }
 
 
 class ClientForm(forms.ModelForm):
-    phone = forms.IntegerField(min_value=100000, max_value=99999999999)
+    phone = forms.IntegerField(min_value=100000, max_value=99999999999, label='Телефон')
 
     class Meta:
         model = Client
@@ -48,7 +49,6 @@ class ClientForm(forms.ModelForm):
             'patronymic': 'Отчество',
             'last_name': 'Фамилия',
             'email': 'Электронная почта',
-            'phone': 'Телефон',
             'address': 'Адрес',
         }
         widgets = {
@@ -66,13 +66,8 @@ class DeviceForm(forms.ModelForm):
             'model': 'Модель',
             'serial_number': 'Серийный номер',
             'kit_state': 'Комплектация и состояние',
-            'defect': 'Неисправность',
             'device_type': 'Тип устройства',
             'vendor': 'Производитель',
-        }
-        widgets = {
-            'kit_state': Textarea(attrs={'cols': 50, 'rows': 3}),
-            'defect': Textarea(attrs={'cols': 50, 'rows': 6}),
         }
 
 
@@ -86,6 +81,11 @@ class RepairForm(forms.ModelForm):
             'employee': 'Мастер',
             'repair_type': 'Тип ремонта',
             'status': 'Статус ремонта',
+            'estimated_duration': 'Предполагаемый срок',
+            'defect': 'Неисправность',
+        }
+        widgets = {
+            'defect': Textarea(attrs={'cols': 50, 'rows': 6}),
         }
 
 
