@@ -1,8 +1,9 @@
 from datetime import date
 
 from django import forms
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.forms import Textarea, DateInput, NumberInput
+from django.forms import Textarea, NumberInput
 
 from repair.models import RepairOrder, Client, Device, Repair, EmployeeComment
 
@@ -72,6 +73,7 @@ class DeviceForm(forms.ModelForm):
 
 
 class RepairForm(forms.ModelForm):
+    employee = forms.ModelChoiceField(queryset=User.objects.filter(groups=1), label='Мастер')
 
     class Meta:
         model = Repair

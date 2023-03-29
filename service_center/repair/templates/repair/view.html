@@ -8,6 +8,7 @@
   <p>Предполагаемая стоимость: {{ order.estimated_price }} руб.</p>
   <p>Окончательная стоимость: {{ order.final_price }} руб.</p>
   <p>Тип ремонта: {{ repair.repair_type }}</p>
+  <p>Мастер: {{ repair.employee }}</p>
   <p>Предполагаемый срок: {{ repair.estimated_duration }} дней.</p>
   <p>Выездной ремонт:
     {% if repair.is_visiting %}
