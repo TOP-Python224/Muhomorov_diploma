@@ -7,13 +7,30 @@
     <link rel="stylesheet" href="{% static 'repair/css/print-styles.css' %}">
   </head>
 
-<h3>ООО Сервисный центр "Питон"</h3>
-<p>г. Новосибирск, ул. Тюленина, 20</p>
-<p>т. 8-383-1234567</p>
-
-<h2>Наряд на ремонт № {{ order.id }} от {{ order.accept_date }}</h2>
-
   <table>
+    <tr>
+      <td align="center">
+          <img src="{% static 'main/images/python.svg' %}" height="50px">
+      </td>
+      <td class="header">
+        ООО Сервисный центр "Питон"
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="header">
+        г. Новосибирск, ул. Тюленина, 26, т. 8-383-1234567
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="header">
+        Вы можете проверить статус ремонта на сайте http://servicepython.ru/status/
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="header">
+        <h3>Наряд на ремонт № {{ order.id }} от {{ order.accept_date }}</h3>
+      </td>
+    </tr>
     <tr>
       <td>
         Владелец:
@@ -51,7 +68,15 @@
         Оборудование:
       </td>
       <td>
-        {{ device }} с/н {{ device.serial_number }}
+        {{ device }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Серийный номер:
+      </td>
+      <td>
+         {{ device.serial_number }}
       </td>
     </tr>
     <tr>
@@ -79,7 +104,7 @@
         Комплектация и состояние:
       </td>
       <td>
-        {{ device.kit_state }}
+        {{ order.kit_state }}
       </td>
     </tr>
     <tr>
@@ -87,7 +112,7 @@
         Неисправность:
       </td>
       <td>
-        {{ device.defect }}
+        {{ repair.defect }}
       </td>
     </tr>
     <tr>
@@ -95,7 +120,7 @@
         Предполагаемая стоимость:
       </td>
       <td>
-        {{ order.estimated_price }}
+        {{ order.estimated_price }} рублей
       </td>
     </tr>
     <tr>
@@ -107,18 +132,36 @@
       </td>
     </tr>
     <tr>
+      <td rowspan="2">
+          С условиями ремонта ознакомлен:
+      </td>
       <td>
-        Назначен мастер:
+        {{ order.client }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+          Подпись:
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="2">
+          Оборудование принял:
+      </td>
+      <td>
+        {{ order.added_by }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+          Подпись:
       </td>
     </tr>
   </table>
 
+  <div class="stamp">М.П.</div>
 
-  <p>Принял: {{ order.added_by }}</p>
-
-  <p>Вы можете проверить статус ремонта на сайте http://service-python.ru/status </p>
-
-<!--<script>-->
-<!--window.onafterprint = window.close;-->
-<!--window.print();-->
-<!--</script>-->
+<script>
+window.onafterprint = window.close;
+window.print();
+</script>

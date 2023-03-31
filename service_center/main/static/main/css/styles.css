@@ -86,7 +86,7 @@ main{
    margin-bottom: 50px;
 }
 
-  section {
+section {
    width: 300px;
    height: 400px;
    margin: 10px;
@@ -97,13 +97,18 @@ main{
    flex-direction: column;
    justify-content: space-between;
    align-items: center;
-  }
+}
 
   section img {
    max-width: 100%;
    max-height: 75%;
    margin-bottom: 20px;
   }
+
+li{
+    list-style-type: "✔";
+    padding-left: 5px;
+}
 
 .contacts{
     display: flex;
