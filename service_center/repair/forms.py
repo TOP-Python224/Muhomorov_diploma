@@ -80,7 +80,6 @@ class RepairForm(forms.ModelForm):
         fields = '__all__'
         labels = {
             'is_visiting': 'Выездной ремонт',
-            'employee': 'Мастер',
             'repair_type': 'Тип ремонта',
             'status': 'Статус ремонта',
             'estimated_duration': 'Предполагаемый срок',

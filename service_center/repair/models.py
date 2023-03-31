@@ -1,6 +1,5 @@
 from datetime import date
 
-from django.core.validators import RegexValidator
 from django.db import models
 from django.contrib.auth.models import User
 
