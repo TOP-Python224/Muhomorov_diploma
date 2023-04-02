@@ -20,8 +20,9 @@
       <td>{{ order.repair.employee}}</td>
       <td>{{ order.repair.status}}</td>
       <td><a href="view/{{ order.id }}/">Просмотр</a> |
-          <a href="print/{{ order.id }}/" target="new">Печать</a> |
-          <a href="edit/{{ order.id }}/">Редактирование</a>
+          <a href="edit/{{ order.id }}/">Редактирование</a> |
+          <a href="print/{{ order.id }}/order/" target="new">Печать ордера</a> |
+          <a href="print/{{ order.id }}/act/" target="new">Печать акта</a>
       </td>
     </tr>
       {% endfor %}

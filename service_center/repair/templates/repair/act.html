@@ -1,0 +1,50 @@
+{% extends base_template|default:"repair/print.html" %}
+
+  <table>
+    {% block table-1 %}
+    <tr>
+      <td colspan="2" class="header">
+        <h3>Акт к наряду на ремонт № {{ order.id }} от {{ order.accept_date }}</h3>
+      </td>
+    </tr>
+    {% endblock table-1 %}
+
+    {% block table-2 %}
+    <tr>
+      <td>
+        Стоимость ремонта:
+      </td>
+      <td>
+        {{ order.final_price }} рублей
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="2">
+          Оборудование выдал:
+      </td>
+      <td>
+        {{ order.added_by }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+          Подпись:
+      </td>
+    </tr>
+        <tr>
+      <td rowspan="2">
+          Претензий по выполненному ремонту не имею.
+        <br>
+          Оборудование получил:
+      </td>
+      <td>
+        {{ order.client }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+          Подпись:
+      </td>
+    </tr>
+    {% endblock table-2 %}
+  </table>

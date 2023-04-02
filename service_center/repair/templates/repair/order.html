@@ -1,0 +1,54 @@
+{% extends base_template|default:"repair/print.html" %}
+
+  <table>
+    {% block table-1 %}
+    <tr>
+      <td colspan="2" class="header">
+        Вы можете проверить статус ремонта на сайте http://servicepython.ru/status/
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="header">
+        <h3>Наряд на ремонт № {{ order.id }} от {{ order.accept_date }}</h3>
+      </td>
+    </tr>
+    {% endblock table-1 %}
+
+    {% block table-2 %}
+    <tr>
+      <td>
+        Предполагаемая стоимость:
+      </td>
+      <td>
+        {{ order.estimated_price }} рублей
+      </td>
+    </tr>
+        <tr>
+      <td rowspan="2">
+          Оборудование принял:
+      </td>
+      <td>
+        {{ order.added_by }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+          Подпись:
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="2">
+          С условиями ремонта ознакомлен:
+      </td>
+      <td>
+        {{ order.client }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+          Подпись:
+      </td>
+    </tr>
+
+    {% endblock table-2 %}
+  </table>

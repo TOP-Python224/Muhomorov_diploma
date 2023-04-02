@@ -64,11 +64,19 @@ class RepairView(DetailView):
 
 
 @method_decorator(login_required, name='dispatch')
-class RepairPrint(RepairView):
+class RepairPrintOrder(RepairView):
     """
     Выводит на печать существующий наряд на ремонт.
     """
-    template_name = 'repair/print.html'
+    template_name = 'repair/order.html'
+
+
+@method_decorator(login_required, name='dispatch')
+class RepairPrintAct(RepairView):
+    """
+    Выводит на печать акт к существующему наряду на ремонт.
+    """
+    template_name = 'repair/act.html'
 
 
 @login_required

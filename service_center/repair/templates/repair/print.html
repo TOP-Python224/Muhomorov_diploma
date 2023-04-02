@@ -6,7 +6,6 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{% static 'repair/css/print-styles.css' %}">
   </head>
-
   <table>
     <tr>
       <td align="center">
@@ -21,16 +20,10 @@
         г. Новосибирск, ул. Тюленина, 26, т. 8-383-1234567
       </td>
     </tr>
-    <tr>
-      <td colspan="2" class="header">
-        Вы можете проверить статус ремонта на сайте http://servicepython.ru/status/
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2" class="header">
-        <h3>Наряд на ремонт № {{ order.id }} от {{ order.accept_date }}</h3>
-      </td>
-    </tr>
+
+    {% block table-1 %}
+    {% endblock table-1 %}
+
     <tr>
       <td>
         Владелец:
@@ -117,46 +110,16 @@
     </tr>
     <tr>
       <td>
-        Предполагаемая стоимость:
-      </td>
-      <td>
-        {{ order.estimated_price }} рублей
-      </td>
-    </tr>
-    <tr>
-      <td>
         Назначен мастер:
       </td>
       <td>
         {{ repair.employee }}
       </td>
     </tr>
-    <tr>
-      <td rowspan="2">
-          С условиями ремонта ознакомлен:
-      </td>
-      <td>
-        {{ order.client }}
-      </td>
-    </tr>
-    <tr>
-      <td>
-          Подпись:
-      </td>
-    </tr>
-    <tr>
-      <td rowspan="2">
-          Оборудование принял:
-      </td>
-      <td>
-        {{ order.added_by }}
-      </td>
-    </tr>
-    <tr>
-      <td>
-          Подпись:
-      </td>
-    </tr>
+
+    {% block table-2 %}
+    {% endblock table-2 %}
+
   </table>
 
   <div class="stamp">М.П.</div>
