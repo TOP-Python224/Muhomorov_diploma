@@ -74,6 +74,7 @@ class DeviceForm(forms.ModelForm):
 
 class RepairForm(forms.ModelForm):
     employee = forms.ModelChoiceField(queryset=User.objects.filter(groups=1), label='Мастер')
+    # employee = forms.ModelChoiceField(queryset=User.objects.filter(groups=GroupNumber.MASTER), label='Мастер')
 
     class Meta:
         model = Repair

@@ -124,8 +124,8 @@ def repair_new(request):
 
             send_mail(
                 'Новый наряд на ремонт',
-                f'Вам назначен ремонт устройства {order_obj.device}, '
-                f'ссылка на наряд http://127.0.0.1:8000/repair/view/{order_obj.id}/',
+                f'Вам назначен ремонт устройства {order_obj.device}.\n '
+                f'Ссылка на наряд http://127.0.0.1:8000/repair/view/{order_obj.id}/',
                 'root@service-python.ru',
                 [order_obj.repair.employee.email],
                 fail_silently=False,

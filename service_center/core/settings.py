@@ -31,16 +31,22 @@ ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.2']
 # Application definition
 
 INSTALLED_APPS = [
+    # Django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # django_simple_captcha
+    'captcha',
+    # django_apscheduler
+    'django_apscheduler',
+    # My applications
     'main.apps.MainConfig',
     'repair.apps.RepairConfig',
     'accounts.apps.AccountsConfig',
-    'captcha',
+
 ]
 
 MIDDLEWARE = [
@@ -145,6 +151,10 @@ CAPTCHA_BACKGROUND_COLOR = '#f8f8f8'
 
 # Mail settings
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_USE_LOCALTIME = True
 
 # Auth settings
 LOGIN_REDIRECT_URL = '/repair'
+
+# Autostart scheduler
+SCHEDULER_AUTOSTART = True
