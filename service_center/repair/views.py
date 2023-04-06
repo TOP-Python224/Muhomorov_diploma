@@ -1,5 +1,3 @@
-from enum import IntEnum
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.core.mail import send_mail
@@ -12,12 +10,7 @@ from django.views.generic import ListView, DetailView
 
 from repair.forms import RepairOrderForm, ClientForm, DeviceForm, RepairForm, EmployeeCommentForm
 from repair.models import RepairOrder, EmployeeComment
-
-
-class GroupNumber(IntEnum):
-    MASTER = 1
-    ACCEPTOR = 2
-    MANAGER = 3
+from repair.vars import GroupNumber
 
 
 @method_decorator(login_required, name='dispatch')
@@ -126,7 +119,7 @@ def repair_new(request):
                 'Новый наряд на ремонт',
                 f'Вам назначен ремонт устройства {order_obj.device}.\n '
                 f'Ссылка на наряд http://127.0.0.1:8000/repair/view/{order_obj.id}/',
-                'root@service-python.ru',
+                'root@servicepython.ru',
                 [order_obj.repair.employee.email],
                 fail_silently=False,
                 )

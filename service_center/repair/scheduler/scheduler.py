@@ -1,5 +1,4 @@
 from sys import stdout
-from enum import IntEnum
 from datetime import date, timedelta
 from os import environ
 
@@ -10,12 +9,7 @@ from django_apscheduler.jobstores import DjangoJobStore
 from django.conf import settings
 
 from repair.models import Repair
-
-
-class StatusNumber(IntEnum):
-    WORKED = 1
-    ORDERED = 2
-    ACCEPTED = 6
+from repair.vars import StatusNumber
 
 
 def check_overdue_repairs():
@@ -27,7 +21,7 @@ def check_overdue_repairs():
             send_mail('Уведомление о просроченном ремонте',
                       f'Вами просрочен ремонт устройства {repair.repairorder.device}.\n'
                       f'Ссылка на наряд http://127.0.0.1:8000/repair/view/{repair.repairorder.id}/',
-                      'root@service-python.ru',
+                      'root@servicepython.ru',
                       [repair.employee.email],
                       fail_silently=False,)
 

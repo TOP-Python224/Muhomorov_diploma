@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.forms import Textarea, NumberInput
 
 from repair.models import RepairOrder, Client, Device, Repair, EmployeeComment
+from repair.vars import GroupNumber
 
 
 class RepairOrderForm(forms.ModelForm):
@@ -73,8 +74,7 @@ class DeviceForm(forms.ModelForm):
 
 
 class RepairForm(forms.ModelForm):
-    employee = forms.ModelChoiceField(queryset=User.objects.filter(groups=1), label='Мастер')
-    # employee = forms.ModelChoiceField(queryset=User.objects.filter(groups=GroupNumber.MASTER), label='Мастер')
+    employee = forms.ModelChoiceField(queryset=User.objects.filter(groups=GroupNumber.MASTER), label='Мастер')
 
     class Meta:
         model = Repair

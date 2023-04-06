@@ -45,12 +45,10 @@ class Device(models.Model):
 
 class Client(models.Model):
     """Описывает клиентов."""
-    # phone_validator = RegexValidator(regex=r"^\d{6,11}$", message='Номер должен быть от 6 до 11 цифр!')
     first_name = models.CharField(max_length=25)
     patronymic = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
     email = models.EmailField(max_length=50, blank=True)
-    # phone = models.CharField(validators=[phone_validator], max_length=11)
     phone = models.BigIntegerField()
     address = models.CharField(max_length=50)
 
