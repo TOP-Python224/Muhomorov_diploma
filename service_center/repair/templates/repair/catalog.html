@@ -1,0 +1,21 @@
+{% extends base_template|default:"repair/base.html" %}
+
+{% block main %}
+
+<h2>
+  Справочники
+</h2>
+<p>
+  <a href="{%  url 'catalog_vendor' %}">Производители</a>
+</p>
+<p>
+  <a href="{%  url 'catalog_devicetype' %}">Типы оборудования</a>
+</p>
+<p>
+  <a href="{%  url 'catalog_repairtype' %}">Типы ремонта</a>
+</p>
+<p>
+  <a href="{%  url 'catalog_repairstatus' %}">Статусы ремонта</a>
+</p>
+
+{% endblock main %}

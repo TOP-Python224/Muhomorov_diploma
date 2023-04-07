@@ -6,7 +6,7 @@ from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 
 from repair.forms import RepairOrderForm, ClientForm, DeviceForm, RepairForm, EmployeeCommentForm
 from repair.models import RepairOrder, EmployeeComment
@@ -20,7 +20,7 @@ class RepairIndex(ListView):
     """
     template_name = 'repair/index.html'
     context_object_name = 'orders'
-    paginate_by = 5
+    paginate_by = 15
 
     def get_queryset(self):
         if Group.objects.get(user=self.request.user).id == GroupNumber.MASTER:
@@ -192,7 +192,7 @@ def repair_edit(request, pk):
                 send_mail(
                     'Сообщение из СЦ "Питон"',
                     f'Ремонт Вашего устройства {device} закончен, пожалуйста заберите его в СЦ "Питон".',
-                    'root@service-python.ru',
+                    'root@servicepython.ru',
                     [client.email],
                     fail_silently=False,
                 )
@@ -210,3 +210,34 @@ def repair_edit(request, pk):
                            'comments_form': comments_form
                           }
                   )
+
+
+@method_decorator(login_required, name='dispatch')
+class CatalogIndex(TemplateView):
+    """
+    Выводит список справочников.
+    """
+    template_name = 'repair/catalog.html'
+
+
+@method_decorator(login_required, name='dispatch')
+class CatalogCreateItem(ListView):
+    """
+    Выводит список элементов справочника с формой для добавления новых элементов.
+    """
+    form_class = None
+    success_url = None
+    template_name = 'repair/catalog_items.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.form_class()
+        return context
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(self.success_url)
+        else:
+            return self.get(request)

@@ -1,0 +1,20 @@
+{% extends base_template|default:"repair/base.html" %}
+
+{% block main %}
+
+<ul>
+{% for item in object_list %}
+  <li>
+    {{ item }}
+  </li>
+{% endfor %}
+</ul>
+
+<form method="POST" action="">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <p><input type="submit" value="Сохранить"></p>
+</form>
+
+
+{% endblock main %}

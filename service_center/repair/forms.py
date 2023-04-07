@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.forms import Textarea, NumberInput
 
-from repair.models import RepairOrder, Client, Device, Repair, EmployeeComment
+from repair.models import RepairOrder, Client, Device, Repair, EmployeeComment, Vendor, DeviceType, RepairType, \
+    RepairStatus
 from repair.vars import GroupNumber
 
 
@@ -102,3 +103,32 @@ class EmployeeCommentForm(forms.ModelForm):
         widgets = {
             'comment': Textarea(attrs={'cols': 100, 'rows': 1})
         }
+
+
+class VendorForm(forms.ModelForm):
+    class Meta:
+        model = Vendor
+        fields = ('name', )
+        labels = {'name': 'Введите нового производителя'}
+
+
+class DeviceTypeForm(forms.ModelForm):
+    class Meta:
+        model = DeviceType
+        fields = ('name', )
+        labels = {'name': 'Введите новый тип устройства'}
+
+
+class RepairTypeForm(forms.ModelForm):
+    class Meta:
+        model = RepairType
+        fields = ('name', )
+        labels = {'name': 'Введите новый тип ремонта'}
+
+
+class RepairStatusForm(forms.ModelForm):
+    class Meta:
+        model = RepairStatus
+        fields = ('name', )
+        labels = {'name': 'Введите новый статус'}
+
