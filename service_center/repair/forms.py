@@ -56,7 +56,7 @@ class ClientForm(forms.ModelForm):
         }
         widgets = {
             'phone': NumberInput(),
-            'address': Textarea(attrs={'cols': 50, 'rows': 1})
+            'address': Textarea(attrs={'cols': 75, 'rows': 1})
         }
 
 

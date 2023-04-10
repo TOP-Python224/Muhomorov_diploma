@@ -35,9 +35,12 @@ class Device(models.Model):
     model = models.CharField(max_length=30)
     serial_number = models.CharField(max_length=30)
 
+    def validate_unique(self, exclude=None):
+        super().validate_unique(exclude={'model', 'serial_number'})
+
     class Meta:
         db_table = 'devices'
-        unique_together = ('model', 'serial_number')
+        unique_together = ['model', 'serial_number']
 
     def __str__(self):
         return f"{self.device_type} {self.vendor} {self.model}"
@@ -50,11 +53,14 @@ class Client(models.Model):
     last_name = models.CharField(max_length=25)
     email = models.EmailField(max_length=50, blank=True)
     phone = models.BigIntegerField()
-    address = models.CharField(max_length=50)
+    address = models.CharField(max_length=75)
+
+    def validate_unique(self, exclude=None):
+        super().validate_unique(exclude={'first_name', 'patronymic', 'last_name', 'phone'})
 
     class Meta:
         db_table = 'clients'
-        unique_together = ('first_name', 'patronymic', 'last_name', 'phone')
+        unique_together = ['first_name', 'patronymic', 'last_name', 'phone']
 
     def __str__(self):
         return f"{self.last_name} {self.first_name} {self.patronymic}"
