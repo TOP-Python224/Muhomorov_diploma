@@ -3,45 +3,41 @@
 {% block main %}
 <form method="POST" action="">
   {% csrf_token %}
-<fieldset>
-  <legend>Общие данные</legend>
-{{ order_form.as_p }}
-{{ repair_form.as_p }}
-</fieldset>
-
-<fieldset>
-  <legend>Клиент</legend>
-{{ client_form.as_p }}
-</fieldset>
-
-<fieldset>
-  <legend>Устройство</legend>
-{{ device_form.as_p }}
-</fieldset>
-
-<fieldset>
-  <legend>Комментарий</legend>
-  {% if comments %}
-    {% for comment in comments %}
-      <fieldset>
-        <legend>{{ comment.date }} {{comment.added_by}}</legend>
-          <p>{{ comment.comment }}</p>
-      </fieldset>
-      <br>
-    {% endfor %}
-  {% else%}
-  <p>Комментариев пока нет.</p>
-  {% endif%}
-  <fieldset>
-    <legend>Добавить комментарий</legend>
-    {{ comments_from.errors}}
-    {{ comments_form.as_p }}
-  </fieldset>
-
-</fieldset>
-
-<p><input type="submit" value="Сохранить"></p>
-<p><input type="reset" value="Сбросить"></p>
+  <div class="box">
+    <h3>Общие данные</h3>
+      {{ order_form.as_p }}
+      {{ repair_form.as_p }}
+  </div>
+  <div class="box">
+    <h3>Клиент</h3>
+    {{ client_form.as_p }}
+  </div>
+  <div class="box">
+    <h3>Устройство</h3>
+    {{ device_form.as_p }}
+  </div>
+  <div class="box">
+    <h3>Комментарии</h3>
+      {{ comments_from.errors}}
+      {{ comments_form.as_p }}
+      {% if comments %}
+        {% for comment in comments %}
+          <p>
+            <strong>
+              {{ comment.date }} {{comment.added_by}}:
+            </strong>
+          </p>
+          {{ comment.comment }}
+        {% endfor %}
+      {% else%}
+        <p>
+          Комментариев пока нет.
+        </p>
+      {% endif%}
+  </div>
+  <div class="box-button">
+    <input type="submit" value="Сохранить">
+    <input type="reset" value="Сбросить">
+  </div>
 </form>
-
 {% endblock main%}

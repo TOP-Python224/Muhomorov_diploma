@@ -10,4 +10,5 @@ class GroupNumber(IntEnum):
 class StatusNumber(IntEnum):
     WORKED = 1
     ORDERED = 2
+    ENDED = 3
     ACCEPTED = 6

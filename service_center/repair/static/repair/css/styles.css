@@ -1,25 +1,59 @@
-.header p{
+header p{
    font-size: 15px;
    text-align: right;
 }
 
-.header a{
+header a{
     text-decoration: none;
     color: darkblue;
     font-weight: 600;
 }
 
-.header a:hover, a:active{
+header a:hover, a:active{
     color: #156741;
 }
 
+main{
+    padding: 20px;
+}
+
+.container {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   align-items: stretch;
+}
+
+form {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   align-items: stretch;
+}
+
+.box{
+    flex-basis: 20%;
+    font-size: 18px;
+    background-color: #F8F8F8;
+    padding: 5px 20px;
+    margin: 10px;
+    border: 1px lightgrey solid;
+}
+
+.box-button{
+    margin: 10px;
+    width: 100%
+}
+
 table{
+    flex-basis: 100%;
     border: darkgrey;
     border-collapse: collapse;
     background: #F8F8F8;
 }
 
 table, th, tr, td {
+    font-size: 18px;
     border: 1px solid;
     border-collapse: collapse;
     padding: 10px;
@@ -38,32 +72,8 @@ table a:hover, a:active{
     color: #156741;
 }
 
-.step-links a{
-    text-decoration: none;
-    color: darkblue;
-    font-weight: 600;
-}
-
-.step-links a:hover, a:active{
-    color: #156741;
-}
-
 .pagination{
     margin-top: 10px;
-}
-
-.data:hover {
-    background-color: white;
-    }
-
-fieldset{
-    font-size: 18px;
-    background: #F8F8F8;
-}
-
-legend{
-    padding: 3px 6px;
-    font-size: 20px;
 }
 
 .errorlist{
@@ -72,4 +82,14 @@ legend{
 
 p .button{
     align: center;
+}
+
+.catalog a{
+    font-size: 18px;
+    text-decoration: none;
+    color: darkblue;
+}
+
+.catalog a:hover, a:active{
+    color: #156741;
 }

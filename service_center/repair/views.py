@@ -1,17 +1,16 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import Group
 from django.core.mail import send_mail
 from django.db import transaction
 from django.http import HttpResponseForbidden, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
-from django.template import Context
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView, TemplateView
 
 from repair.forms import RepairOrderForm, ClientForm, DeviceForm, RepairForm, EmployeeCommentForm
 from repair.models import RepairOrder, EmployeeComment, Client, Device
-from repair.vars import GroupNumber
+from repair.vars import GroupNumber, StatusNumber
 
 
 @method_decorator(login_required, name='dispatch')
@@ -74,6 +73,7 @@ class RepairPrintAct(RepairView):
 
 
 @login_required
+# @permission_required('repair.add_repair', raise_exception=True)
 def repair_new(request):
     """
     Создание нового наряда
@@ -166,6 +166,7 @@ def repair_new(request):
 
 
 @login_required
+# @permission_required('repair.change_repair', 'repair.change_repairorder', raise_exception=True)
 def repair_edit(request, pk):
     """
     Редактирование существующего наряда
@@ -214,8 +215,8 @@ def repair_edit(request, pk):
                     comment_obj.added_by = request.user
                     comment_obj.save()
 
-            if repair_form_obj.status.id == 3 \
-                    and status_id != 3 \
+            if repair_form_obj.status.id == StatusNumber.ENDED \
+                    and status_id != StatusNumber.ENDED \
                     and client.email:
                 send_mail(
                     'Сообщение из СЦ "Питон"',

@@ -53,7 +53,7 @@ class Client(models.Model):
     last_name = models.CharField(max_length=25)
     email = models.EmailField(max_length=50, blank=True)
     phone = models.BigIntegerField()
-    address = models.CharField(max_length=75)
+    address = models.CharField(max_length=80)
 
     def validate_unique(self, exclude=None):
         super().validate_unique(exclude={'first_name', 'patronymic', 'last_name', 'phone'})
@@ -71,7 +71,7 @@ class EmployeeComment(models.Model):
     date = models.DateTimeField(auto_now=True)
     repair_order = models.ForeignKey('RepairOrder', models.PROTECT, default=None)
     added_by = models.ForeignKey(User, models.PROTECT)
-    comment = models.CharField(max_length=100, blank=True)
+    comment = models.CharField(max_length=120, blank=True)
 
     class Meta:
         db_table = 'employee_comments'
@@ -109,11 +109,11 @@ class RepairStatus(models.Model):
 class Repair(models.Model):
     """Описывает конкретные ремонты."""
     status = models.ForeignKey(RepairStatus, models.PROTECT)
-    estimated_duration = models.PositiveIntegerField(default=5)
+    estimated_duration = models.PositiveIntegerField(default=7)
     repair_type = models.ForeignKey(RepairType, models.PROTECT)
     is_visiting = models.BooleanField(default=False)
     employee = models.ForeignKey(User, models.PROTECT)
-    defect = models.CharField(max_length=300)
+    defect = models.CharField(max_length=240)
 
     class Meta:
         db_table = 'repairs'
@@ -139,7 +139,7 @@ class RepairOrder(models.Model):
         through=EmployeeComment,
         through_fields=('repair_order', 'added_by'),
     )
-    kit_state = models.CharField(max_length=150)
+    kit_state = models.CharField(max_length=240)
     added_by = models.ForeignKey(User, models.PROTECT, related_name='+')
 
     class Meta:

@@ -1,56 +1,50 @@
 {% extends base_template|default:"repair/base.html" %}
 
 {% block main %}
-<fieldset>
-  <legend>Общие данные</legend>
-  <p>Дата приемки: {{ order.accept_date }}</p>
-  <p>Дата возврата: {% if order.return_date %} {{ order.return_date }} {% endif%}</p>
-  <p>Предполагаемая стоимость: {{ order.estimated_price }} руб.</p>
-  <p>Окончательная стоимость: {{ order.final_price }} руб.</p>
-  <p>Тип ремонта: {{ repair.repair_type }}</p>
-  <p>Мастер: {{ repair.employee }}</p>
-  <p>Предполагаемый срок: {{ repair.estimated_duration }} дней.</p>
-  <p>Выездной ремонт:
+<div class="box">
+  <h3>Общие данные</h3>
+  <p><strong>Номер наряда:</strong> {{ order.pk }}</p>
+  <p><strong>Дата приемки:</strong> {{ order.accept_date }}</p>
+  <p><strong>Дата возврата:</strong> {% if order.return_date %} {{ order.return_date }} {% endif%}</p>
+  <p><strong>Предполагаемая стоимость:</strong> {{ order.estimated_price }} руб.</p>
+  <p><strong>Окончательная стоимость:</strong> {{ order.final_price }} руб.</p>
+  <p><strong>Тип ремонта:</strong> {{ repair.repair_type }}</p>
+  <p><strong>Мастер:</strong> {{ repair.employee }}</p>
+  <p><strong>Предполагаемый срок:</strong> {{ repair.estimated_duration }} дней.</p>
+  <p><strong>Выездной ремонт:</strong>
     {% if repair.is_visiting %}
       Да
     {% else %}
       Нет
     {% endif%}
   </p>
-  <p>Статус ремонта: {{ repair.status }}</p>
-</fieldset>
-<br>
-<fieldset>
-  <legend>Клиент</legend>
-  <p>Ф.И.О: {{ client }}</p>
-  <p>e-mail: {{ client.email }}</p>
-  <p>Телефон: {{ client.phone }}</p>
-  <p>Адрес: {{ client.address }}</p>
-</fieldset>
-<br>
-<fieldset>
-  <legend>Устройство</legend>
-  <p>Тип: {{ device.device_type }}</p>
-  <p>Модель: {{ device.model }}</p>
-  <p>Производитель: {{ device.vendor }}</p>
-  <p>Серийный номер: {{ device.serial_number }}</p>
-  <p>Комплектация и состояние: {{ order.kit_state }}</p>
-  <p>Неисправность: {{ repair.defect }}</p>
-</fieldset>
-<br>
-<fieldset>
-  <legend>Комментарий</legend>
+  <p><strong>Статус ремонта:</strong> {{ repair.status }}</p>
+</div>
+<div class="box">
+  <h3>Клиент</h3>
+  <p><strong>Ф.И.О:</strong> {{ client }}</p>
+  <p><strong>e-mail:</strong> {{ client.email }}</p>
+  <p><strong>Телефон:</strong> {{ client.phone }}</p>
+  <p><strong>Адрес:</strong> {{ client.address }}</p>
+</div>
+<div class="box">
+  <h3>Устройство</h3>
+  <p><strong>Тип:</strong> {{ device.device_type }}</p>
+  <p><strong>Производитель:</strong> {{ device.vendor }}</p>
+  <p><strong>Модель:</strong> {{ device.model }}</p>
+  <p><strong>Серийный номер:</strong> {{ device.serial_number }}</p>
+  <p><strong>Комплектация и состояние:</strong> {{ order.kit_state }}</p>
+  <p><strong>Неисправность:</strong> {{ repair.defect }}</p>
+</div>
+<div class="box">
+  <h3>Комментарии</h3>
   {% if comments %}
     {% for comment in comments %}
-      <fieldset>
-        <legend>{{ comment.date }} {{comment.added_by}}</legend>
-          <p>{{ comment.comment }}</p>
-      </fieldset>
-      <br>
+  <p><strong>{{ comment.date }} {{comment.added_by}}:</strong> {{ comment.comment }}</p>
     {% endfor %}
   {% else%}
   <p>Комментариев пока нет.</p>
   {% endif%}
-</fieldset>
+</div>
 
 {% endblock main %}

@@ -3,7 +3,7 @@ from datetime import date
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.forms import Textarea, NumberInput
+from django.forms import Textarea, NumberInput, DateInput
 
 from repair.models import RepairOrder, Client, Device, Repair, EmployeeComment, Vendor, DeviceType, RepairType, \
     RepairStatus
@@ -37,7 +37,8 @@ class RepairOrderForm(forms.ModelForm):
             'kit_state': 'Комплектация и состояние'
         }
         widgets = {
-            'kit_state': Textarea(attrs={'cols': 50, 'rows': 3}),
+            'return_date': DateInput(attrs={'type': 'date'}),
+            'kit_state': Textarea(attrs={'cols': 40, 'rows': 6}),
         }
 
 
@@ -56,7 +57,7 @@ class ClientForm(forms.ModelForm):
         }
         widgets = {
             'phone': NumberInput(),
-            'address': Textarea(attrs={'cols': 75, 'rows': 1})
+            'address': Textarea(attrs={'cols': 40, 'rows': 2})
         }
 
 
@@ -88,7 +89,7 @@ class RepairForm(forms.ModelForm):
             'defect': 'Неисправность',
         }
         widgets = {
-            'defect': Textarea(attrs={'cols': 50, 'rows': 6}),
+            'defect': Textarea(attrs={'cols': 40, 'rows': 6}),
         }
 
 
@@ -101,7 +102,7 @@ class EmployeeCommentForm(forms.ModelForm):
             'comment': 'Новый комментарий',
         }
         widgets = {
-            'comment': Textarea(attrs={'cols': 100, 'rows': 1})
+            'comment': Textarea(attrs={'cols': 40, 'rows': 3})
         }
 
 
@@ -131,4 +132,3 @@ class RepairStatusForm(forms.ModelForm):
         model = RepairStatus
         fields = ('name', )
         labels = {'name': 'Введите новый статус'}
-
