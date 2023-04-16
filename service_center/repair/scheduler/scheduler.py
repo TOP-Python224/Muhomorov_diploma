@@ -17,6 +17,7 @@ def check_overdue_repairs():
                                                         StatusNumber.ORDERED,
                                                         StatusNumber.ACCEPTED])
     for repair in current_repairs:
+        print(repair)
         if date.today() - repair.repairorder.accept_date > timedelta(days=repair.estimated_duration):
             send_mail('Уведомление о просроченном ремонте',
                       f'Вами просрочен ремонт устройства {repair.repairorder.device}.\n'

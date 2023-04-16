@@ -150,7 +150,22 @@ class RepairOrder(models.Model):
         return f"Наряд №{self.pk} от {self.accept_date}"
 
 
+class CatalogPerms(models.Model):
+    """
+    Фиктивная модель. Создает в БД разрешение catalog_add_item без создания модели.
+    """
+    class Meta:
+        managed = False
+        default_permissions = ()
+        permissions = (
+            ('catalog_add_item', 'Catalog add item'),
+        )
+
+
 def get_full_name(self):
+    """
+    Выводит имя и фамилию авторизованного пользователя.
+    """
     return f"{self.first_name} {self.last_name}"
 
 

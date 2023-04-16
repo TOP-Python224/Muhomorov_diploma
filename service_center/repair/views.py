@@ -1,11 +1,13 @@
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import Group
+from django.core.handlers import exception
 from django.core.mail import send_mail
 from django.db import transaction
-from django.http import HttpResponseForbidden, HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.utils.decorators import method_decorator
+from django.views.defaults import permission_denied
 from django.views.generic import ListView, DetailView, TemplateView
 
 from repair.forms import RepairOrderForm, ClientForm, DeviceForm, RepairForm, EmployeeCommentForm
@@ -44,8 +46,7 @@ class RepairView(DetailView):
         comments = EmployeeComment.objects.filter(repair_order__pk=order_id)
         if not (group_id in (GroupNumber.ACCEPTOR, GroupNumber.MANAGER)
                 or self.request.user.id == order.repair.employee.id):
-            return HttpResponseForbidden(f'Ремонт по наряду №{order_id} выполняет другой мастер!\n'
-                                         f'Вы не можете просматривать наряды других мастеров!')
+            return permission_denied(request, exception, template_name='403.html')
 
         return render(request,
                       self.template_name,
@@ -73,14 +74,11 @@ class RepairPrintAct(RepairView):
 
 
 @login_required
-# @permission_required('repair.add_repair', raise_exception=True)
+@permission_required('repair.add_repairorder', raise_exception=True)
 def repair_new(request):
     """
     Создание нового наряда
     """
-    if Group.objects.get(user=request.user).id != GroupNumber.ACCEPTOR:
-        return HttpResponseForbidden('Вы не можете создавать наряды!')
-
     if request.method == 'GET':
         order_form = RepairOrderForm()
         client_form = ClientForm()
@@ -102,14 +100,6 @@ def repair_new(request):
                 comments_form.is_valid()
                 ]):
 
-            # with transaction.atomic():
-            #     order_obj = order_form.save(commit=False)
-            #     order_obj.client = client_form.save()
-            #     order_obj.device = device_form.save()
-            #     order_obj.repair = repair_form.save()
-            #     order_obj.added_by = request.user
-            #     order_obj.save()
-
             with transaction.atomic():
                 order_obj = order_form.save(commit=False)
                 client_obj = client_form.save(commit=False)
@@ -123,7 +113,6 @@ def repair_new(request):
                               }
                 )
                 order_obj.client = client
-                # order_obj.device = device_form.save()
                 device_obj = device_form.save(commit=False)
                 device, created = Device.objects.get_or_create(
                     model=device_obj.model,
@@ -166,22 +155,21 @@ def repair_new(request):
 
 
 @login_required
-# @permission_required('repair.change_repair', 'repair.change_repairorder', raise_exception=True)
+@permission_required('repair.change_repairorder', raise_exception=True)
 def repair_edit(request, pk):
     """
-    Редактирование существующего наряда
+    Редактирование существующего наряда.
     """
     group_id = Group.objects.get(user=request.user).id
-    order = RepairOrder.objects.get(pk=pk)
+    order = get_object_or_404(RepairOrder, pk=pk)
     client = order.client
     device = order.device
     repair = order.repair
     comments = EmployeeComment.objects.filter(repair_order__pk=pk)
     status_id = repair.status.id
 
-    if not (group_id == GroupNumber.ACCEPTOR or request.user.id == order.repair.employee.id):
-        return HttpResponseForbidden(f'Ремонт по наряду №{order.pk} выполняет другой мастер!\n'
-                                     f'Вы не можете редактировать наряды других мастеров!')
+    if group_id == GroupNumber.MASTER and request.user.id != order.repair.employee.id:
+        return permission_denied(request, exception, template_name='403.html')
 
     if request.method == 'GET':
         order_form = RepairOrderForm(instance=order)
@@ -262,11 +250,6 @@ class CatalogCreateItem(ListView):
         context = super().get_context_data(**kwargs)
         context['form'] = self.form_class()
         return context
-
-    def get(self, request, *args, **kwargs):
-        if Group.objects.get(user=request.user).id != GroupNumber.ACCEPTOR:
-            return HttpResponseForbidden('Вы не можете редактировать справочники!')
-        return super().get(request, *args, **kwargs)
 
     def post(self, request):
         form = self.form_class(request.POST)

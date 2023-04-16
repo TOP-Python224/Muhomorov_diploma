@@ -72,8 +72,26 @@ table a:hover, a:active{
     color: #156741;
 }
 
+.data:hover {
+    background-color: white;
+}
+
 .pagination{
     margin-top: 10px;
+}
+
+.pagination a{
+    font-size: 18px;
+    text-decoration: none;
+    color: darkblue;
+}
+
+.pagination a:hover, a:active{
+    color: #156741;
+}
+
+.step-links{
+    font-size: 18px;
 }
 
 .errorlist{
@@ -92,4 +110,8 @@ p .button{
 
 .catalog a:hover, a:active{
     color: #156741;
+}
+
+.error-msg{
+    font-size: 24px;
 }
